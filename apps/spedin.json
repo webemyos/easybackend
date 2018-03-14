@@ -1,0 +1,17 @@
+{"app":"spedin","apiToken":"c81e728d9d4c2f636f067f89cc14862c",
+    
+    
+    "dataServerType":"mongoDb","bdd":{"url":"mongodb://admin:admin@ds129906.mlab.com:29906/spendin"},
+    "entities":[{"name":"user"},{"name":"commerce"},{"name":"mon commerce"},{"name":"ville"}], 
+
+"functions":[{"name": "searchMorceau", "type":"jql", "json" : {"from": "morceau,artiste,groupe", 
+    "join":"morceau.artisteId=artiste.id,morceau.groupeId=groupe.id",
+    "where":"name=1 or artiste.name=2 or groupe.name=3"}},
+    
+    {"name": "searchTest", "type":"jql", "json" : {"from": "morceau,artiste,groupe", 
+        "join":"morceau.artisteId=artiste.id,morceau.groupeId=groupe.id",
+        "where":"name=1 or artiste.name=2 or groupe.name=3"}}
+    ,
+
+    {"name": "addAnnonce", "type":"code", "code" : "setData('User', {'name', '%1'})"}
+    ]}

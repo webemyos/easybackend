@@ -1,0 +1,6 @@
+{"app":"preston", "apiToken": "press", "dataServerType":"jsonDb" , 
+    "bdd":{"dataDirectory":"./apps/betwix/data"},
+    "entities":[{"name":"message"},{"name":"user"},{"name":"category"}, {"name":"activity"} ],
+    "ressources":[],
+    "functions":[{"name": "searchActivity", "json" : {"from": "activity","where":"categoryId=1 or categoryId=2"}}]
+}  

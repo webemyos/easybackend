@@ -1,0 +1,6 @@
+
+
+
+nodemon ./server.js
+
+pause

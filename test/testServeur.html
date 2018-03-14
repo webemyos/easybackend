@@ -1,0 +1,80 @@
+<h1>GET DATA SERVEUR</h1>
+<form method='post' action='http://easybackend.com/Api/getdata?token=app:test!apiToken:xyz' target='_blank' >
+  
+  data recherché :  <input type='text' name='data' value='user' />  
+  <br/>
+  parametre : <input type=''text' name='params' value='getAll'/>
+  <br/>
+  
+<input type='submit' value='tester'>
+</form>
+
+
+<form method='post' action='http://easybackend.com/Api/getdata?token=app:test!apiToken:xyz' target='_blank' >
+  
+  data recherché :  <input type='text' name='data' value='message' />  
+  <br/>
+  parametre : <input type=''text' name='params' value='getAll'/>
+  <br/>
+  
+<input type='submit' value='tester'>
+</form>
+
+
+
+
+
+<h1>SET DATA</h1>
+<form method='post' action='http://easybackend.com/Api/setdata?token=app:test!apiToken:xyz' target='_blank' >
+  
+  data recherché :  <input type='text' name='data' value='user' />  
+  <br/>
+  parametre : <input type=''text' name='params' value='{"name":"jerome", "adress":"14 87 78 89"}'/>
+  <br/>
+  
+<input type='submit' value='tester'>
+</form>
+
+
+<form method='post' action='http://easybackend.com/Api/setdata?token=app:test!apiToken:xyz' target='_blank' >
+  
+  data recherché :  <input type='text' name='data' value='message' />  
+  <br/>
+  parametre : <input type=''text' name='params' value='{"userId":"1","message":"nouveau message"}'/>
+  <br/>
+  
+<input type='submit' value='tester'>
+</form>
+
+
+
+<h1>CALL</h1>
+<form method='post' action='http://easybackend.com/Api/call?token=app:test!apiToken:xyz' target='_blank' >
+  
+  data recherché :  <input type='text' name='data' value='searchUser' />  
+  <br/>
+  parametre : <input type=''text' name='params' value='{"1":"jerome"}'/>
+  <br/>
+  
+<input type='submit' value='tester'>
+</form>
+
+<form method='post' action='http://easybackend.com/Api/call?token=app:test!apiToken:xyz' target='_blank' >
+  
+  data recherché :  <input type='text' name='data' value='searchUserAdress' />  
+  <br/>
+  parametre : <input type=''text' name='params' value='{"1":"14 87 78 89"}'/>
+  <br/>
+  
+<input type='submit' value='tester'>
+</form>
+
+<form method='post' action='http://easybackend.com/Api/call?token=app:test!apiToken:xyz' target='_blank' >
+  
+  data recherché :  <input type='text' name='data' value='searchMessage' />  
+  <br/>
+  parametre : <input type=''text' name='params' value='{"1":"1"}'/>
+  <br/>
+  
+<input type='submit' value='tester'>
+</form>

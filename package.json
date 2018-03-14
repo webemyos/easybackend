@@ -1,0 +1,16 @@
+{
+  "name": "easybackend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ent": "^2.2.0",
+    "fb": "^2.0.0",
+    "mysql": "^2.15.0"
+  }
+}

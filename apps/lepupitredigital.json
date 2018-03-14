@@ -1,0 +1,10 @@
+{"app":"lepupitredigital", "apiToken": "slcpV100", "dataServerType":"jsonDb" , 
+    "bdd":{"dataDirectory":"./apps/lepupitredigital/data"},
+    "entities":[{"name":"message"},{"name":"feedback"},{"name":"artiste"},{"name":"groupe"},{"name":"morceau"}],
+    "ressources":[{"name":"Acdc Black inBlack.slcp", "dateCreated":"12/12/2017"}, {"name":"Depp purple smoke on the water.slcp", "dateCreated":"12/12/2017"}],
+    "functions":[{"name": "searchMorceau", "json" : {"from": "morceau,artiste,groupe", 
+                                                      "join":"morceau.artisteId=artiste.id,morceau.groupeId=groupe.id",
+                                                      "where":"name=1 or artiste.name=2 or groupe.name=3"}}]}
+  
+  
+  

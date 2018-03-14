@@ -1,0 +1,8 @@
+{"app":"preston", "apiToken": "press", "dataServerType":"jsonDb" , 
+    "bdd":{"dataDirectory":"./apps/preston/data"},
+    "entities":[{"name":"message"}],
+    "ressources":[],
+    "functions":[]}
+  
+  
+  

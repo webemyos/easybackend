@@ -1,0 +1,6 @@
+{"app":"democom", "apiToken": "dmc", "dataServerType":"jsonDb" , "bdd":{"dataDirectory":"./apps/democom/data"},
+  "entities":[{"name":"user"},{"name":"message"}],
+  "ressources":[],
+  "functions":[{"name": "searchUser", "json" : {"from": "user","where":"name=1 or name=2"}},
+               {"name": "searchUserAdress", "json" : {"from": "user","where":"adress=1 or adress=2"}} ,
+               {"name": "searchMessage", "json" : {"from": "message","where":"userId=1 or userId=2"}}]}
