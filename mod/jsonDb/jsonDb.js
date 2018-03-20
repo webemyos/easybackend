@@ -31,8 +31,6 @@ var jsonDb = function(dataDirectory)
             dataFile = this.dataDirectory + "/" + core.postParam.getParameter("data") + ".json";
         }
         
-        console.log(dataFile);
-
         //TODO VERIFIER QUE le fichier existe
         if(fs.existsSync(dataFile))
         {
@@ -147,8 +145,6 @@ var jsonDb = function(dataDirectory)
                     }
                 }
                 
-                gconsole.log(nbProp);
-                
                 if(nbProp == 1)
                 {
                     gconsole.log("Delete");
@@ -166,7 +162,6 @@ var jsonDb = function(dataDirectory)
                 entite = new Object();
                 for(prop in params)
                 {
-                    console.log("Update");
                    entite["id"] = parseInt(lastId) + 1;
                    entite[prop] = params[prop];
                 }

@@ -136,7 +136,14 @@ core.process = function()
              mod = new root();
         break ;
         default :
-             mod = new html();
+
+            //Appel du fichier App.js de l'application
+            //Doit permettre de gerer tout les appels compliqué que l'on ne peut pas faire autrement
+
+            console.log('../apps' + core.page + '/userApp.js');
+            var userApp = require('../apps' + core.page + '/userApp.js');
+
+             mod = new userApp();
         break ;
         
    }  

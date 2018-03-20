@@ -1,3 +1,4 @@
+
 /**
 *  Projet EasyBackEnd
 *  Web serveur d'application global
@@ -38,6 +39,11 @@ var MongoClient = require("mongodb").MongoClient;
                 params = JSON.parse(core.postParam.getParameter("params"));
             }
             
+            if(data == undefined)
+            {
+                data = core.postParam.getParameter("data");
+            }
+
             if(params.method == undefined)
             {
                 core.writeFormat("023", "missingMethod");
@@ -95,6 +101,11 @@ var MongoClient = require("mongodb").MongoClient;
                         core.writeFormat("020", "getDataOk", this.getById(datas, params.id ));
                                             
                     break;
+                    case "getWhere" :
+
+                    gconsole.log("GET WHERE");
+                        this.getWhere(data, params);
+                    break;
                     default :
                         core.writeFormat("027", "unknowMethod");
                     break;
@@ -113,105 +124,36 @@ var MongoClient = require("mongodb").MongoClient;
      */
     this.setData = function(entity, params)
     {
-        if(entity != undefined)
+        if(params == undefined)
         {
-            dataFile = this.dataDirectory + "/" + entity + ".json";
-        } 
-        else
-        {
-            dataFile = this.dataDirectory + "/" + core.postParam.getParameter("data") + ".json";
+            params = JSON.parse(core.postParam.getParameter("params"));
         }
         
-          //TODO VERIFIER QUE le fichier existe
-        if(fs.existsSync(dataFile))
+        if(data == undefined)
         {
-            var datas = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
-            
-            if(params == undefined)
-            {
-                var params = JSON.parse(core.postParam.getParameter("params"));
-            }
-            else
-            {
-                var params = JSON.parse(params);
-            }
-            
-            var result = new Array();
-            
-            keys = Array();
-            values = Array();
-
-            for(prop in params)
-            {
-                keys.push(prop);
-                values.push(params[prop]);
-            }
-        
-            find = false;
-            lastId = 0;
-            nbProp = 0;
-            
-            //On parcourt pour mettre a jouur
-            for(i=0; i < datas.entities.length; i++)
-            {
-                lastId = datas.entities[i].id;
-                
-                if(datas.entities[i].id == params.id )
-                {
-                    //On met à jour les donnée
-                    datas.entities[i];
-                    
-                    for(prop in params)
-                    {
-                       datas.entities[i][prop] = params[prop];
-                       find = true;
-                       nbProp +=1;
-                    }
-                }
-                
-                gconsole.log(nbProp);
-                
-                if(nbProp == 1)
-                {
-                    gconsole.log("Delete");
-                  
-                }
-                else
-                {
-                    gconsole.log("Update");
-                    result.push(JSON.stringify(datas.entities[i]));
-                }
-            }
-            
-            if(find == false)
-            {
-                entite = new Object();
-                for(prop in params)
-                {
-                    console.log("Update");
-                   entite["id"] = parseInt(lastId) + 1;
-                   entite[prop] = params[prop];
-                }
-                
-                result.push(JSON.stringify(entite));
-            }
-      
-
-            // TODO RAJOTER LES ENTITE DEJA CREE
-            result = "{\"entities\":[" + result.join(",") + "]}";
-
-            //Reecrit le fichier avec les nouvelle donnée
-            fs.writeFileSync(dataFile, result);
-
-
-            core.writeFormat("031","setDataOk");
-            core.writeEnd();
-        
+            data = core.postParam.getParameter("data");
         }
-        else
-        {
-            core.writeFormat("021","unknowEntite");
-        }
+        var MongoClient = require("mongodb").MongoClient;
+
+        MongoClient.connect( this.server, (error, client) => {
+
+            db = client.db("spendin");
+
+            console.log("data" + data);
+            console.log("params" + JSON.stringify(params));
+            console.log(db);;
+
+
+             if (error) throw error;
+               // db.Coupon.insert(params);
+
+              db.collection(data).insert(params);
+
+        });
+
+
+
+
     };
     
     /*
@@ -277,6 +219,44 @@ var MongoClient = require("mongodb").MongoClient;
                 });
             });
     
+    };
+
+    this.getWhere = function(data, params)
+    {
+        var prop = Object();
+
+        for (var property1 in params) {
+        
+            var jsonObject = "{";
+
+            if(property1 != "method")
+            {
+                prop[property1] = params[property1];
+                jsonObject += property1 + ":'"  + params[property1] + "'";
+            }
+
+            jsonObject += "}";
+          }
+     
+        db.collection(data).find(JSON.parse(JSON.stringify(prop))).toArray(function (error, results) {
+                      
+            if (error)
+            {
+                console.log(error);
+            return ;
+            }
+             
+            entities = Array();
+
+            results.forEach(function(i, obj) {
+              entities.push(i);
+            });
+
+           // console.log(entities);
+            core.writeFormat("020", "getDataOk", entities);
+
+            core.writeEnd();
+        });
     };
 }
 
