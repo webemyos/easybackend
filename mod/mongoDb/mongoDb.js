@@ -14,19 +14,9 @@ var fs = require('fs');
 /*
 * Connect l'utilisateur à l'application
 */
-var mongoDb = function(server)
-{
-    this.server = server;
-
- 	
-var MongoClient = require("mongodb").MongoClient;
-    MongoClient.connect( this.server, (error, client) => {
-    if (error) throw error;
-
-    console.log("Connecté à la base de données " + this.server);
-
-    db = client.db("spendin");
-});
+    var mongoDb = function(server)
+    {
+        this.server = server;
     
     /*
      * Obtient le données
@@ -129,31 +119,27 @@ var MongoClient = require("mongodb").MongoClient;
             params = JSON.parse(core.postParam.getParameter("params"));
         }
         
-        if(data == undefined)
-        {
-            data = core.postParam.getParameter("data");
-        }
+        data = core.postParam.getParameter("data") ;
+        
         var MongoClient = require("mongodb").MongoClient;
 
         MongoClient.connect( this.server, (error, client) => {
 
             db = client.db("spendin");
 
-            console.log("data" + data);
+            gconsole.log("Data : " + data );
+            gconsole.log("Entity : " + entity  );
+
             console.log("params" + JSON.stringify(params));
-            console.log(db);;
-
-
+         
              if (error) throw error;
-               // db.Coupon.insert(params);
-
+         
+             //Insert in the collection
               db.collection(data).insert(params);
-
+              
+              core.writeFormat("031","setDataOk");
+              core.writeEnd();
         });
-
-
-
-
     };
     
     /*

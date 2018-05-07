@@ -18,8 +18,6 @@ var jql = function(){};
  */
 jql.getByJql = function(jsonReq, params)
 {
-    gconsole.log(" 1) From " + jsonReq.from + " join " + jsonReq.join + " where " + jsonReq.where + " params :" + params);
-
     gapp = core.token.getParameter("app");
     core.app.readConfig(gapp);
     
@@ -31,8 +29,10 @@ jql.getByJql = function(jsonReq, params)
         var join = jsonReq.join.split(",");
     }
     
-    var where = jsonReq.where.split(" ");
-    
+//    var where = ( where != undefined) ? jsonReq.where.split(" "): '';
+    var where =  jsonReq.where.split(" ");
+  
+
     var condition = Array();
     var properties = Array(); 
     var entities = Array(); 
@@ -54,15 +54,10 @@ jql.getByJql = function(jsonReq, params)
             prop = properties[p].split("=");
             key = prop[0];
             
-            gconsole.log("2 : " + params);
             if(params != undefined && params != '')
             {
                 datas = JSON.parse(params);
-                console.log("3 ) PARAMS : ");
-                console.log(datas);
-                console.log(key + ":" + prop[1]);
-                console.log("4) Property : " + properties[p]);
-    
+        
                //Valeur passé en paramettre
                 value = datas[prop[1]];
             }
@@ -74,26 +69,19 @@ jql.getByJql = function(jsonReq, params)
             //Entité principale
             if(key.indexOf(".") == -1 && data.entities[j][key] != null)
             {
-                gconsole.log("Saarch "  + data.entities[j][key] + ":" + value) ;
-            
                if(data.entities[j][key].indexOf(value) > -1)
                {
                    result.push(true);
-                   gconsole.log("EQUAL");
                }
                else
                {
                    result.push(false);
-                   gconsole.log("NOTEQUAL");
                }
-               
             }
             else
             {
               keys = key.split(".");
               
-              console.log("SEArch  :" + data.entities[j][keys[0]]  + "" + value) ;
-
               //On a pas passé de parametre
               if(value == undefined)
               {
@@ -154,12 +142,7 @@ jql.extractConditionProperty =function(where, condition, properties)
 jql.isValid = function( condition, result)
 {
     var valide = '';
-          
-
-    console.log("Conditions:");
-    console.log(condition);
-    console.log(result);
-
+   
     if(condition.length  == 0)
     {
        valide = result[0];
@@ -239,11 +222,8 @@ jql.loadFile = function(jsonReq)
             }
          }
             
-        gconsole.log(entities);
         result.push("{" + entities + "}");
     }
-    
-    //gconsole.log(JSON.stringify(result));
     
     dataFile = core.app.config.bdd.dataDirectory + "/" + from[0] + "_tmp.json";
     
@@ -267,7 +247,6 @@ jql.find =function (file, key, value)
 {
     for(i=0; i < file.entities.length; i++  )
     {
-        gconsole.log("Find : " + file.entities[i][key] + ":"+ value );
         if(file.entities[i][key] == value)
         {
             return JSON.stringify(file.entities[i]);

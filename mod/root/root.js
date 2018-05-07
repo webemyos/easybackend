@@ -100,7 +100,7 @@ var root = function()
         func.json.join = func.json.join.replace(regex, "="); 
         func.json.where = func.json.where.replace(regex, "="); 
         
-        let find = false;
+        var find = false;
         
         for(i= 0; i < core.app.config.functions.length; i++)
         {

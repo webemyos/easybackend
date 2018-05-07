@@ -12,7 +12,6 @@
 var url = require('url');
 var querystring = require('querystring');
 var fs = require('fs');
-var bodyParser = require('body-parser');
 
 //Include base function
 var config = require('./config');
@@ -156,6 +155,7 @@ core.process = function()
    else
    { 
        core.writeFormat("11", "IncorrectCall");
+       core.writeEnd();
    }
    
    // core.writeEnd();
@@ -212,9 +212,6 @@ core.data = function(data)
     if(data != "" && data != "undefined")
     {
         core.postParam.add(data);
-
-        gconsole.log("Parseur");
-       // gconsole.log(bodyParser.;
     }
 };
 

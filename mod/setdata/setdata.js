@@ -8,6 +8,7 @@
 */
 var jsonDb = require('../../mod/jsonDb/jsonDb');
 var gmysql = require('../../mod/gmysql/gmysql');
+var mongoDb = require('../../mod/mongoDb/mongoDb');
 
 var setdata = function()
 {
@@ -60,6 +61,9 @@ var setdata = function()
                   break;
             case "mysql":
                 dataServer = new gmysql(core.app.config.bdd.server, core.app.config.bdd.database, core.app.config.bdd.user, core.app.config.bdd.password);
+            break;
+            case "mongoDb" :
+                 dataServer = new mongoDb(core.app.config.bdd.url);
             break;
         }
 
